@@ -16,7 +16,7 @@ public class Games : MonoBehaviour
     private bool generated;
 
     public TextMeshProUGUI mineCounterText;
-
+    public TextMeshProUGUI winText;
 
     [SerializeField] private TextMeshProUGUI timerText;
 
@@ -53,6 +53,9 @@ public class Games : MonoBehaviour
 
         Vector3 topRight = new Vector3(width, height, 0) + new Vector3(1f, 1f, 0);
         timerText.transform.position = Camera.main.WorldToScreenPoint(topRight);
+
+        Vector3 top = new Vector3(width / 2f, height + 1f, 0);
+        winText.transform.position = Camera.main.WorldToScreenPoint(top);
     }
 
     private void NewGame()
@@ -302,6 +305,9 @@ public class Games : MonoBehaviour
         }
 
         gameover = true;
+        winText.gameObject.SetActive(true);
+        winText.text = "You Win!";
+        
 
         // Flag all the mines
         for (int x = 0; x < width; x++)
